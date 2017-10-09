@@ -11,7 +11,7 @@ import RxCocoa
 
 // MARK: - CompositeDisposable
 extension CompositeDisposable {
-    func add(disposables: [Disposable]) {
+    public func add(disposables: [Disposable]) {
         for disposable in disposables {
             _ = self.insert(disposable)
         }
