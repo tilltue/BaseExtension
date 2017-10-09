@@ -1,0 +1,55 @@
+PODS:
+  - BaseExtension (1.0.0):
+    - RxCocoa
+    - RxSwift
+    - XCGLogger
+  - Nimble (7.0.2)
+  - ObjcExceptionBridging (1.0.1):
+    - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
+  - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
+  - Quick (1.2.0)
+  - RxCocoa (4.0.0-rc.0):
+    - RxSwift (~> 4.0.0-rc.0)
+  - RxSwift (4.0.0-rc.0)
+  - XCGLogger (6.0.1):
+    - XCGLogger/Core (= 6.0.1)
+  - XCGLogger/Core (6.0.1):
+    - ObjcExceptionBridging
+
+DEPENDENCIES:
+  - BaseExtension (from `../`)
+  - Nimble (~> 7.0.2)
+  - Quick (~> 1.2.0)
+  - RxCocoa (from `https://github.com/ReactiveX/RxSwift`, branch `rxswift4.0-swift4.0`)
+  - RxSwift (from `https://github.com/ReactiveX/RxSwift`, branch `rxswift4.0-swift4.0`)
+
+EXTERNAL SOURCES:
+  BaseExtension:
+    :path: "../"
+  RxCocoa:
+    :branch: rxswift4.0-swift4.0
+    :git: https://github.com/ReactiveX/RxSwift
+  RxSwift:
+    :branch: rxswift4.0-swift4.0
+    :git: https://github.com/ReactiveX/RxSwift
+
+CHECKOUT OPTIONS:
+  RxCocoa:
+    :commit: 61261f2ee97ace3e08713921dd9406669b9debee
+    :git: https://github.com/ReactiveX/RxSwift
+  RxSwift:
+    :commit: 61261f2ee97ace3e08713921dd9406669b9debee
+    :git: https://github.com/ReactiveX/RxSwift
+
+SPEC CHECKSUMS:
+  BaseExtension: e435999c1b2c6db35a41ca042e4af8f01825a60a
+  Nimble: bfe1f814edabba69ff145cb1283e04ed636a67f2
+  ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
+  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
+  RxCocoa: 58841348f4c6e6f6cd244522c16a6b7df5008956
+  RxSwift: f0ff3c78e1f71a7d3506defde0b79c72fe39bac3
+  XCGLogger: b4ca980580108cfeaf221afe158f5d89c1be22e0
+
+PODFILE CHECKSUM: ae8ad04295f8cf38e9c8cce0c670a9d9c42da44c
+
+COCOAPODS: 1.2.1
