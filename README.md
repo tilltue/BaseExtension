@@ -1,9 +1,9 @@
 # BaseExtension
 
-[![CI Status](http://img.shields.io/travis/wade.hawk/BaseExtension.svg?style=flat)](https://travis-ci.org/wade.hawk/BaseExtension)
 [![Version](https://img.shields.io/cocoapods/v/BaseExtension.svg?style=flat)](http://cocoapods.org/pods/BaseExtension)
 [![License](https://img.shields.io/cocoapods/l/BaseExtension.svg?style=flat)](http://cocoapods.org/pods/BaseExtension)
 [![Platform](https://img.shields.io/cocoapods/p/BaseExtension.svg?style=flat)](http://cocoapods.org/pods/BaseExtension)
+![Swift](https://img.shields.io/badge/%20in-swift%204.0-orange.svg)
 
 ## Example
 
