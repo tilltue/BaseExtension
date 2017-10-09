@@ -16,10 +16,10 @@ protocol BaseViewControllerType: class {
 }
 
 open class BaseViewController: UIViewController, BaseViewControllerType {
-    var disposeBag = DisposeBag()
-    var compositeDisposable = CompositeDisposable()
-    let viewControllerState = Variable<ViewControllerState>(.notloaded)
-    var statusBarStyle: UIStatusBarStyle { get { return .default } }
+    open var disposeBag = DisposeBag()
+    open var compositeDisposable = CompositeDisposable()
+    open let viewControllerState = Variable<ViewControllerState>(.notloaded)
+    open var statusBarStyle: UIStatusBarStyle { get { return .default } }
     deinit {
         self.compositeDisposable.dispose()
         log.verbose(type(of: self))

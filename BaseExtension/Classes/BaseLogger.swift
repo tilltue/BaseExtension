@@ -10,7 +10,7 @@ import XCGLogger
 let log = XCGLogger.default
 
 public struct BaseLogger {
-    static func setupLogger() {
+    public static func setupLogger() {
         #if DEBUG
             log.setup(level: .verbose, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true)
         #else
