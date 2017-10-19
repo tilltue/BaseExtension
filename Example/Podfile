@@ -2,12 +2,12 @@ use_frameworks!
 
 target 'BaseExtension_Example' do
   pod 'BaseExtension', :path => '../'
-  pod 'RxSwift', :git => 'https://github.com/ReactiveX/RxSwift', :branch => 'rxswift4.0-swift4.0'
-  pod 'RxCocoa', :git => 'https://github.com/ReactiveX/RxSwift', :branch => 'rxswift4.0-swift4.0'
+  pod 'RxSwift'
+  pod 'RxCocoa'
   target 'BaseExtension_Tests' do
     inherit! :search_paths
 
     pod 'Quick', '~> 1.2.0'
-  pod 'Nimble', '~> 7.0.2'
+    pod 'Nimble', '~> 7.0.2'
   end
 end
