@@ -11,14 +11,14 @@ import RxCocoa
 
 protocol BaseViewControllerType: class {
     var disposeBag: DisposeBag { get }
-    var viewControllerState: Variable<ViewControllerState> { get }
+    var viewControllerState: ViewControllerState { get set }
     var statusBarStyle: UIStatusBarStyle { get }
 }
 
 open class BaseViewController: UIViewController, BaseViewControllerType {
     open var disposeBag = DisposeBag()
     open var compositeDisposable = CompositeDisposable()
-    open let viewControllerState = Variable<ViewControllerState>(.notloaded)
+    open var viewControllerState: ViewControllerState = .notloaded
     open var statusBarStyle: UIStatusBarStyle { get { return .default } }
     deinit {
         self.compositeDisposable.dispose()
@@ -26,9 +26,9 @@ open class BaseViewController: UIViewController, BaseViewControllerType {
     }
     override open func viewDidLoad() {
         super.viewDidLoad()
-        self.viewControllerState.value = .hidden
-        self.rx.viewEvent.subscribe(onNext:{ [weak self] state in
-            self?.viewControllerState.value = state
+        self.viewControllerState = .hidden
+        self.rx.viewEvent.subscribe(onNext: { [weak self] state in
+            self?.viewControllerState = state
         }).disposed(by: disposeBag)
     }
     override open func viewWillDisappear(_ animated: Bool) {

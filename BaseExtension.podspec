@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
 s.name             = 'BaseExtension'
-s.version          = '1.0.1'
+s.version          = '1.0.2'
 s.summary          = 'base extension'
 
 # This description is used to generate tags and improve search results.
@@ -33,6 +33,7 @@ s.ios.deployment_target = '8.0'
 s.source_files = 'BaseExtension/Classes/**/*'
 s.dependency "RxSwift"
 s.dependency "RxCocoa"
+s.dependency "RxDataSources"
 s.dependency "XCGLogger"
 
 # s.resource_bundles = { 'BaseExtension' => ['BaseExtension/Classes/*.xib'] }
