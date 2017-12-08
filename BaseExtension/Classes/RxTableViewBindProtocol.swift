@@ -24,17 +24,10 @@ extension RxTableCellViewModel {
 
 struct RxTableViewBindProperty<ModelType: RxTableCellViewModel> {
     var cellNibSet = [String]()
-    var bindViewModels = BehaviorSubject<[AnimatableSectionModel<String,ModelType>]>(value: [])
+    var bindViewModels = BehaviorRelay<[AnimatableSectionModel<String,ModelType>]>(value: [])
     var selectedCell = PublishSubject<(IndexPath,ModelType)>()
     var reloaded = PublishSubject<Void>()
     var insideCellEvent = PublishSubject<Any>()
-    var cellViewModels: [AnimatableSectionModel<String,ModelType>] {
-        get {
-            do {
-                return try self.bindViewModels.value()
-            }catch { return [] }
-        }
-    }
 }
 
 protocol RxTableViewBindProtocol: class {
@@ -53,32 +46,32 @@ extension RxTableViewBindProtocol {
         register(tableView: tableView, nibNameSet: self.bindProperty.cellNibSet)
         let dataSource = createDataSource(tableView: tableView)
         dataSource.canEditRowAtIndexPath = { [weak self] (ds, IndexPath) -> Bool in
-            guard let property = self?.bindProperty else { return false }
-            return property.cellViewModels[IndexPath.section].items[IndexPath.row].canEdit
+            guard let bindViewModels = self?.bindProperty.bindViewModels else { return false }
+            return bindViewModels.value[IndexPath.section].items[IndexPath.row].canEdit
         }
         dataSource.reloadedEvent = { [weak self] in
             guard let property = self?.bindProperty else { return }
             property.reloaded.on(.next(()))
         }
-        self.bindProperty.bindViewModels.asObserver().bind(to: tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
+        self.bindProperty.bindViewModels.asObservable().bind(to: tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
         tableView.rx.itemSelected.subscribe(onNext: { [weak self] indexPath in
             guard let property = self?.bindProperty else { return }
-            guard let sectionModel = (property.cellViewModels.filter{ $0.model == "section\(indexPath.section)" }.first) else { return }
+            guard let sectionModel = (property.bindViewModels.value.filter{ $0.model == "section\(indexPath.section)" }.first) else { return }
             property.selectedCell.on(.next((indexPath, sectionModel.items[indexPath.row])))
         }).disposed(by: disposeBag)
         tableView.rx.itemDeleted.subscribe(onNext: { [weak self] indexPath in
             guard let property = self?.bindProperty else { return }
-            var fetchViewModels = property.cellViewModels[indexPath.section]
+            var fetchViewModels = property.bindViewModels.value[indexPath.section]
             fetchViewModels.items.remove(at: indexPath.row)
-            property.bindViewModels.on(.next([fetchViewModels]))
+            property.bindViewModels.accept([fetchViewModels])
         }).disposed(by: disposeBag)
     }
     
     private func cellViewModel(at indexPath: IndexPath) -> ModelType? {
-        let cellViewModels = self.bindProperty.cellViewModels
-        guard indexPath.section < cellViewModels.count else { return nil }
-        guard indexPath.row < cellViewModels[indexPath.section].items.count else { return nil }
-        return cellViewModels[indexPath.section].items[indexPath.row]
+        let bindViewModels = self.bindProperty.bindViewModels.value
+        guard indexPath.section < bindViewModels.count else { return nil }
+        guard indexPath.row < bindViewModels[indexPath.section].items.count else { return nil }
+        return bindViewModels[indexPath.section].items[indexPath.row]
     }
     
     private func register(tableView: UITableView, nibNameSet: [String]) {
