@@ -60,7 +60,7 @@ extension RxTableViewBindProtocol {
             guard let property = self?.bindProperty else { return }
             property.reloaded.on(.next(()))
         }
-        //self.cellViewModels.asDriver().drive(tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
+        self.bindProperty.bindViewModels.asObserver().bind(to: tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
         tableView.rx.itemSelected.subscribe(onNext: { [weak self] indexPath in
             guard let property = self?.bindProperty else { return }
             guard let sectionModel = (property.cellViewModels.filter{ $0.model == "section\(indexPath.section)" }.first) else { return }
