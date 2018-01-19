@@ -54,3 +54,17 @@ extension Reactive where Base: UIView {
         return sentMessage(#selector(UIView.layoutSubviews))
     }
 }
+
+// MARK: - UIButton
+extension Reactive where Base: UIButton {
+    public var throttleTap: Observable<Void> {
+        return self.tap.throttle(0.2, scheduler: MainScheduler.instance)
+    }
+}
+
+// MARK: - UIBarButtonItem
+extension Reactive where Base: UIBarButtonItem {
+    public var throttleTap: Observable<Void> {
+        return self.tap.throttle(0.2, scheduler: MainScheduler.instance)
+    }
+}
