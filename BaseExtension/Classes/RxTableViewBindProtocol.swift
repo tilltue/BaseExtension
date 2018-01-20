@@ -28,6 +28,9 @@ public struct RxTableViewBindProperty<ModelType: RxTableCellViewModel> {
     public var selectedCell = PublishSubject<(IndexPath,ModelType)>()
     public var reloaded = PublishSubject<Void>()
     public var insideCellEvent = PublishSubject<Any>()
+    public init() {
+        
+    }
 }
 
 public protocol RxTableViewBindProtocol: class {
@@ -42,7 +45,7 @@ extension RxTableViewBindProtocol {
     
     public typealias SectionModelType = AnimatableSectionModel<String,ModelType>
     
-    func bindDataSource(tableView: UITableView) {
+    public func bindDataSource(tableView: UITableView) {
         register(tableView: tableView, nibNameSet: self.bindProperty.cellNibSet)
         let dataSource = createDataSource(tableView: tableView)
         dataSource.canEditRowAtIndexPath = { [weak self] (ds, IndexPath) -> Bool in
