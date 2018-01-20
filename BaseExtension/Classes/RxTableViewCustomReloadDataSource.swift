@@ -11,12 +11,12 @@ import RxDataSources
 import RxSwift
 import RxCocoa
 
-class RxTableViewCustomReloadDataSource<S: SectionModelType>: RxTableViewSectionedReloadDataSource<S> {
+open class RxTableViewCustomReloadDataSource<S: SectionModelType>: RxTableViewSectionedReloadDataSource<S> {
     
-    var reloadEvent: ((Element,Int,Int,S.Item?, S.Item?) -> Void)? = nil
-    var reloadedEvent: (() -> Void)? = nil
+    public var reloadEvent: ((Element,Int,Int,S.Item?, S.Item?) -> Void)? = nil
+    public var reloadedEvent: (() -> Void)? = nil
     
-    override func tableView(_ tableView: UITableView, observedEvent: Event<Element>) {
+    override open func tableView(_ tableView: UITableView, observedEvent: Event<Element>) {
         Binder(self) { [weak self] dataSource, element in
             let oldCount = dataSource.sectionModels.first?.items.count ?? 0
             let oldFirstItem: S.Item? = dataSource.sectionModels.first?.items.first

@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-protocol RxTableCellViewModel: IdentifiableType, Equatable {
+public protocol RxTableCellViewModel: IdentifiableType, Equatable {
     var cellIdentifier: String { get }
     var canEdit: Bool { get set }
 }
@@ -22,15 +22,15 @@ extension RxTableCellViewModel {
     }
 }
 
-struct RxTableViewBindProperty<ModelType: RxTableCellViewModel> {
-    var cellNibSet = [String]()
-    var bindViewModels = BehaviorRelay<[AnimatableSectionModel<String,ModelType>]>(value: [])
-    var selectedCell = PublishSubject<(IndexPath,ModelType)>()
-    var reloaded = PublishSubject<Void>()
-    var insideCellEvent = PublishSubject<Any>()
+public struct RxTableViewBindProperty<ModelType: RxTableCellViewModel> {
+    public var cellNibSet = [String]()
+    public var bindViewModels = BehaviorRelay<[AnimatableSectionModel<String,ModelType>]>(value: [])
+    public var selectedCell = PublishSubject<(IndexPath,ModelType)>()
+    public var reloaded = PublishSubject<Void>()
+    public var insideCellEvent = PublishSubject<Any>()
 }
 
-protocol RxTableViewBindProtocol: class {
+public protocol RxTableViewBindProtocol: class {
     associatedtype ModelType: RxTableCellViewModel
     var bindProperty: RxTableViewBindProperty<ModelType> { get set }
     var disposeBag: DisposeBag { get set }
@@ -40,7 +40,7 @@ protocol RxTableViewBindProtocol: class {
 
 extension RxTableViewBindProtocol {
     
-    typealias SectionModelType = AnimatableSectionModel<String,ModelType>
+    public typealias SectionModelType = AnimatableSectionModel<String,ModelType>
     
     func bindDataSource(tableView: UITableView) {
         register(tableView: tableView, nibNameSet: self.bindProperty.cellNibSet)
