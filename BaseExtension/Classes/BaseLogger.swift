@@ -7,14 +7,14 @@
 
 import XCGLogger
 
-let log = XCGLogger.default
+public let log = XCGLogger.default
 
 public struct BaseLogger {
-    public static func setupLogger() {
+    public static func setupLogger(level: XCGLogger.Level? = nil) {
         #if DEBUG
-            log.setup(level: .verbose, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true)
+            log.setup(level: level ?? .verbose, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true)
         #else
-            log.setup(level: .severe, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true)
+            log.setup(level: level ?? .severe, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true)
             if let consoleLog = log.destination(withIdentifier: XCGLogger.Constants.baseConsoleDestinationIdentifier) as? ConsoleDestination {
                 consoleLog.logQueue = XCGLogger.logQueue
             }
