@@ -68,3 +68,38 @@ extension Reactive where Base: UIBarButtonItem {
         return self.tap.throttle(0.2, scheduler: MainScheduler.instance)
     }
 }
+
+public enum KeyboardNotification {
+    case willShow
+    case didShow
+    case willChangeFrame
+    case willHide
+    case didHide
+    var name: NSNotification.Name {
+        switch self {
+        case .willShow:
+            return NSNotification.Name.UIKeyboardWillShow
+        case .didShow:
+            return NSNotification.Name.UIKeyboardDidShow
+        case .willChangeFrame:
+            return NSNotification.Name.UIKeyboardWillChangeFrame
+        case .willHide:
+            return NSNotification.Name.UIKeyboardWillHide
+        case .didHide:
+            return NSNotification.Name.UIKeyboardDidHide
+        }
+    }
+}
+
+// MARK: - NotificationCenter
+extension Reactive where Base: NotificationCenter {
+    public func keyboard(_ notification: KeyboardNotification) -> Observable<(begin: (CGRect,TimeInterval), end: (CGRect,TimeInterval))> {
+        return self.notification(notification.name)
+            .flatMap { event -> Observable<(begin: (CGRect,TimeInterval), end: (CGRect,TimeInterval))> in
+                guard let userInfo = event.userInfo as? [String: AnyObject] else { return Observable.empty() }
+                guard let begin = userInfo[UIKeyboardFrameBeginUserInfoKey]?.cgRectValue, let end = userInfo[UIKeyboardFrameEndUserInfoKey]?.cgRectValue, let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval else { return Observable.empty() }
+                if begin.origin == end.origin { return Observable.empty() }
+                return Observable.just((begin: (begin, duration), end: (end, duration)))
+        }
+    }
+}
