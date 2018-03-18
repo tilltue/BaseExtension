@@ -8,6 +8,11 @@
 import Foundation
 
 extension Date {
+    public func dateString(dateFormat: String = "yyyy-MM-dd") -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = dateFormat
+        return formatter.string(from: self)
+    }
     public static func dateAt(string: String, dateFormat: String = "yyyy-MM-dd") -> Date? {
         let formatter = DateFormatter()
         formatter.dateFormat = dateFormat
