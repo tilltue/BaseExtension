@@ -26,6 +26,7 @@ public struct RxTableViewBindProperty<ModelType: RxTableCellViewModel> {
     public var cellNibSet = [String]()
     public var bindViewModels = BehaviorRelay<[AnimatableSectionModel<String,ModelType>]>(value: [])
     public var selectedCell = PublishSubject<(IndexPath,ModelType)>()
+    public var deletedCell = PublishSubject<(IndexPath,ModelType)>()
     public var reloaded = PublishSubject<Void>()
     public var insideCellEvent = PublishSubject<Any>()
     public init() {
@@ -64,9 +65,8 @@ extension RxTableViewBindProtocol {
         }).disposed(by: disposeBag)
         tableView.rx.itemDeleted.subscribe(onNext: { [weak self] indexPath in
             guard let property = self?.bindProperty else { return }
-            var fetchViewModels = property.bindViewModels.value[indexPath.section]
-            fetchViewModels.items.remove(at: indexPath.row)
-            property.bindViewModels.accept([fetchViewModels])
+            guard let sectionModel = (property.bindViewModels.value.filter{ $0.model == "section\(indexPath.section)" }.first) else { return }
+            property.deletedCell.on(.next((indexPath, sectionModel.items[indexPath.row])))
         }).disposed(by: disposeBag)
     }
     
