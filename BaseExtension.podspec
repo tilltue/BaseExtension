@@ -29,6 +29,8 @@ s.source           = { :git => 'https://github.com/tilltue/BaseExtension.git', :
 # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
 s.ios.deployment_target = '8.0'
+s.swift_version = '4.1'
+s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.1' }
 
 s.source_files = 'BaseExtension/Classes/**/*'
 s.dependency "RxSwift"
