@@ -1,49 +1,60 @@
 PODS:
-  - BaseExtension (1.1.7):
+  - BaseExtension (1.2.2):
     - RxCocoa
     - RxDataSources
     - RxSwift
     - XCGLogger
-  - Differentiator (3.0.2)
-  - Nimble (7.0.2)
+  - Differentiator (3.1.0)
+  - Nimble (7.3.1)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
-  - Quick (1.2.0)
-  - RxCocoa (4.0.0):
+  - Quick (1.3.2)
+  - RxCocoa (4.3.1):
     - RxSwift (~> 4.0)
-  - RxDataSources (3.0.2):
+  - RxDataSources (3.1.0):
     - Differentiator (~> 3.0)
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - RxSwift (4.0.0)
-  - XCGLogger (6.0.1):
-    - XCGLogger/Core (= 6.0.1)
-  - XCGLogger/Core (6.0.1):
+  - RxSwift (4.3.1)
+  - XCGLogger (6.1.0):
+    - XCGLogger/Core (= 6.1.0)
+  - XCGLogger/Core (6.1.0):
     - ObjcExceptionBridging
 
 DEPENDENCIES:
   - BaseExtension (from `../`)
-  - Nimble (~> 7.0.2)
-  - Quick (~> 1.2.0)
+  - Nimble
+  - Quick
   - RxCocoa
   - RxSwift
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Differentiator
+    - Nimble
+    - ObjcExceptionBridging
+    - Quick
+    - RxCocoa
+    - RxDataSources
+    - RxSwift
+    - XCGLogger
+
 EXTERNAL SOURCES:
   BaseExtension:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  BaseExtension: dd1277c9bb3dd0053f0244a988a07161a4f8e294
-  Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
-  Nimble: bfe1f814edabba69ff145cb1283e04ed636a67f2
+  BaseExtension: e27d8ca9dab35df86c68688b748e339b1be509d9
+  Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
+  Nimble: 04f732da099ea4d153122aec8c2a88fd0c7219ae
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
-  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
-  RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
-  RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
-  RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
-  XCGLogger: b4ca980580108cfeaf221afe158f5d89c1be22e0
+  Quick: 2623cb30d7a7f41ca62f684f679586558f483d46
+  RxCocoa: 78763c7b07d02455598d9fc3c1ad091a28b73635
+  RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
+  RxSwift: fe0fd770a43acdb7d0a53da411c9b892e69bb6e4
+  XCGLogger: 7f7f43f15dfe3a305fa1342b7dc29af656289abd
 
-PODFILE CHECKSUM: c72c6fa08ba8535cee75d9d2a31298346b33fcde
+PODFILE CHECKSUM: b259ad5b5657634eabb0725e287695aec306daa5
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3
