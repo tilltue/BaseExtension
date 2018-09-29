@@ -189,7 +189,7 @@ extension Shakeable where Self: UIView {
     public func shakeAnimation(){
         func makeShakeAnimation() -> CAAnimation {
             let shake = CAKeyframeAnimation(keyPath: "transform.translation")
-            shake.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+            shake.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
             shake.duration = 0.5
             shake.values = [-13,13,-13,13,-8,8-3,3,0]
             return shake
