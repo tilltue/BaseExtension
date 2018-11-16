@@ -78,15 +78,15 @@ public enum KeyboardNotification {
     var name: NSNotification.Name {
         switch self {
         case .willShow:
-            return UIWindow.keyboardWillShowNotification
+            return UIResponder.keyboardWillShowNotification
         case .didShow:
-            return UIWindow.keyboardDidShowNotification
+            return UIResponder.keyboardDidShowNotification
         case .willChangeFrame:
-            return UIWindow.keyboardWillChangeFrameNotification
+            return UIResponder.keyboardWillChangeFrameNotification
         case .willHide:
-            return UIWindow.keyboardWillHideNotification
+            return UIResponder.keyboardWillHideNotification
         case .didHide:
-            return UIWindow.keyboardDidHideNotification
+            return UIResponder.keyboardDidHideNotification
         }
     }
 }

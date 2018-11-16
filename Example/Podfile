@@ -6,8 +6,6 @@ target 'BaseExtension_Example' do
   pod 'RxCocoa'
   target 'BaseExtension_Tests' do
     inherit! :search_paths
-    pod 'Quick'
-    pod 'Nimble'
   end
 end
 
