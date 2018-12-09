@@ -1,5 +1,5 @@
 PODS:
-  - BaseExtension (1.2.4):
+  - BaseExtension (1.2.5):
     - RxCocoa
     - RxDataSources
     - RxSwift
@@ -42,7 +42,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  BaseExtension: 36d99aa5256aad56393b8b727b094d14aa0a876c
+  BaseExtension: 0d00b8da5b47fa8d75deeb0f1824b5d9e66bc094
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
