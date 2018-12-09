@@ -62,6 +62,13 @@ extension RxTableViewBindProtocol {
         bindEvent(tableView: tableView)
     }
     
+    public func createDataSource(tableView: UITableView) -> RxTableViewCustomReloadDataSource<SectionModelType> {
+        let dataSource = RxTableViewCustomReloadDataSource<SectionModelType>(configureCell: { ds, tv, ip, cellViewModel -> UITableViewCell in
+            return UITableViewCell()
+        })
+        return dataSource
+    }
+    
     public func createAnimatedDataSource(tableView: UITableView) -> RxTableViewCustomAnimatedDataSource<SectionModelType> {
         let dataSource = RxTableViewCustomAnimatedDataSource<SectionModelType>(configureCell: { ds, tv, ip, cellViewModel -> UITableViewCell in
             return UITableViewCell()
