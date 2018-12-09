@@ -40,6 +40,7 @@ public protocol RxTableViewBindProtocol: class {
     var disposeBag: DisposeBag { get set }
     func bindDataSource(tableView: UITableView)
     func createDataSource(tableView: UITableView) -> RxTableViewCustomReloadDataSource<SectionModelType>
+    func createAnimatedDataSource(tableView: UITableView) -> RxTableViewCustomAnimatedDataSource<SectionModelType>
 }
 
 extension RxTableViewBindProtocol {
@@ -58,6 +59,32 @@ extension RxTableViewBindProtocol {
             property.reloaded.on(.next(()))
         }
         self.bindProperty.bindViewModels.asObservable().bind(to: tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
+        bindEvent(tableView: tableView)
+    }
+    
+    public func createAnimatedDataSource(tableView: UITableView) -> RxTableViewCustomAnimatedDataSource<SectionModelType> {
+        let dataSource = RxTableViewCustomAnimatedDataSource<SectionModelType>(configureCell: { ds, tv, ip, cellViewModel -> UITableViewCell in
+            return UITableViewCell()
+        })
+        return dataSource
+    }
+    
+    public func bindAnimatedDataSource(tableView: UITableView) {
+        register(tableView: tableView, nibNameSet: self.bindProperty.cellNibSet)
+        let dataSource = createAnimatedDataSource(tableView: tableView)
+        dataSource.canEditRowAtIndexPath = { [weak self] (ds, IndexPath) -> Bool in
+            guard let bindViewModels = self?.bindProperty.bindViewModels else { return false }
+            return bindViewModels.value[IndexPath.section].items[IndexPath.row].canEdit
+        }
+        dataSource.reloadedEvent = { [weak self] in
+            guard let property = self?.bindProperty else { return }
+            property.reloaded.on(.next(()))
+        }
+        self.bindProperty.bindViewModels.asObservable().bind(to: tableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
+        bindEvent(tableView: tableView)
+    }
+    
+    private func bindEvent(tableView: UITableView) {
         tableView.rx.itemSelected.subscribe(onNext: { [weak self] indexPath in
             guard let property = self?.bindProperty else { return }
             guard let sectionModel = (property.bindViewModels.value.filter{ $0.model == "section\(indexPath.section)" }.first) else { return }
